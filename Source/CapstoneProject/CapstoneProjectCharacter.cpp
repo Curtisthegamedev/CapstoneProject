@@ -42,7 +42,9 @@ ACapstoneProjectCharacter::ACapstoneProjectCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
-
+	
+	//hp
+	health = 1.0f;
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -96,6 +98,16 @@ void ACapstoneProjectCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVec
 void ACapstoneProjectCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		StopJumping();
+}
+
+//take damage cpp function
+void ACapstoneProjectCharacter::TakeDamage(float _damageAmount)
+{
+	health -= _damageAmount;
+
+	if (health < 0.0f) {
+		health = 0.0f;
+	}
 }
 
 void ACapstoneProjectCharacter::TurnAtRate(float Rate)
