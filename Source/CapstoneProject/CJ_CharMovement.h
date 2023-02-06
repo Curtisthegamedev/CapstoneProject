@@ -23,6 +23,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	//Add Componet to CharMovement
+	UPROPERTY()
+		class UParticleSystemComponent* MyParticleSystem;
+
+	UPROPERTY()
+		class UCollidingPawnMovementComponent* MyMovementComponent;
+
+	virtual UPawnMovementComponent* GetMovementComponent() const override; 
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
